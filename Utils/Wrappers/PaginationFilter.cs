@@ -22,13 +22,13 @@ namespace Utils.Wrappers
 
         public PaginationFilter(int pageNumber, int pageSize)
         {
-            this.PageNumber = pageNumber == 0 ? 1 : pageNumber;
+            this.PageNumber = pageNumber <= 0 ? 1 : pageNumber;
             this.PageSize = pageSize > 50 ? 50 : pageSize;
         }
 
         public PaginationFilter(int pageNumber, int pageSize, string? searchName, string? orderBy, bool descending)
         {
-            this.PageNumber = pageNumber == 0 ? 1 : pageNumber;
+            this.PageNumber = pageNumber <= 0 ? 1 : pageNumber;
             this.PageSize = pageSize > 50 ? 50 : pageSize;
             this.searchName = searchName;
             this.orderBy = orderBy;

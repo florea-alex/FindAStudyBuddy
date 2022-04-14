@@ -69,14 +69,14 @@ namespace ProiectMDS.Services.UserServices
 
             switch (filter.orderBy)
             {
-                case "Name":
+                case "UserName":
                     users = !filter.descending == false ? users.OrderBy(x => x.UserName) : users.OrderByDescending(x => x.UserName);
                     break;
                 case "Email":
                     users = !filter.descending == false ? users.OrderBy(s => s.Email) : users.OrderByDescending(x => x.Email);
                     break;
-                case "Age":
-                    users = !filter.descending == false ? users.OrderBy(s => s.FirstName) : users.OrderByDescending(x => x.FirstName);
+                case "Faculty":
+                    users = !filter.descending == false ? users.OrderBy(s => s.Faculty) : users.OrderByDescending(x => x.Faculty);
                     break;
                 default:
                     users = !filter.descending == false ? users.OrderBy(s => s.LastName) : users.OrderByDescending(x => x.LastName);

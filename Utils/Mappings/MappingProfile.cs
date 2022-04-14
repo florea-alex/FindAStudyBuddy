@@ -14,7 +14,7 @@ namespace Utils.Mappings
         public MappingProfile()
         {
             CreateMap<User, UserGetModel>().ReverseMap();
-            CreateMap<User, UserPutModel>().ReverseMap();
+            CreateMap<User, UserPutModel>().ReverseMap(); 
         }
     }
 }
