@@ -1,4 +1,4 @@
-# FindAStduyBuddy
+# Find A Study Buddy
 
 User Stories:
 1. As a user, I want to be able to create an account.
