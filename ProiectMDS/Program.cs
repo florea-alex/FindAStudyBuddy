@@ -141,6 +141,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+
 //Global error handler
 app.UseMiddleware<Middleware>();
 
