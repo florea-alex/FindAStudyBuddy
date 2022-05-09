@@ -2,29 +2,12 @@ import React from 'react'
 import {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import Dashboard from './Dashboard';
-
+import axios from 'axios';
 function Login() {
 
     // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
-
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
 
   const handleSubmit = (event) => {
     //Prevent page reload
@@ -32,21 +15,27 @@ function Login() {
 
     var { uname, pass } = document.forms[0];
 
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
-
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-      }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }
+    const object = {
+      userName: uname.value, 
+      password: pass.value, 
+    };
+   
+    axios.post('https://findastudybuddy.azurewebsites.net/api/Auth/Login', object)
+       .then(response => {
+         console.log(response)
+            if (response.status != 200) {
+                alert("There was a problem with the registration. Please try again.");
+              }
+              localStorage.setItem("isAuthenticated", "true");
+              console.log(localStorage)
+              setIsSubmitted(true);
+              //console.log(response)
+              //console.log(response.status)
+            })
+        .catch(error => {
+             console.log(error.response.data.message);
+             alert("There was a problem with the registration. Please try again.\n" + "Error: " + error.response.data.message);
+            })
   };
 
   // Generate JSX code for error message

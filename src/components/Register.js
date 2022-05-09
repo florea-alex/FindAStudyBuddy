@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import validator from 'validator'
+import axios from 'axios'
 
 function Register() {
   // React States
@@ -8,27 +9,27 @@ function Register() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
+  var message = "User was successfully registered.";
 
   const errors = {
-    email: "e-mail is not valid",
-    pass: "password is not strong enough"
+    email: "E-mail is not valid",
+    pass: "Password is not strong enough"
   };
 
   const handleSubmit = (event) => {
     //Prevent page reload
     event.preventDefault();
 
-    var { uname, email, pass, name, faculty} = document.forms[0];
+    var { userName, email, pass, firstName, lastName} = document.forms[0];
+
+    const object = {
+      userName: userName.value, 
+      email: email.value, 
+      firstName: firstName.value, 
+      lastName: lastName.value,
+      password: pass.value, 
+      role: "user"
+    };
 
      if (!validator.isEmail(email.value))
       // Username not found
@@ -38,14 +39,28 @@ function Register() {
         // Invalid password
         setErrorMessages({ name: "pass", message: errors.pass });
       }
-else {
-    database.push({
-        username: uname.value,
-        password: pass.value
-    });
-    console.log(database);
-    setIsSubmitted(true);
-    }
+      else {
+
+          axios.post('https://findastudybuddy.azurewebsites.net/api/Auth/Register', object)
+            .then(response => {
+              if (response.status != 200) {
+                alert("There was a problem with the registration. Please try again.");
+              }
+              setIsSubmitted(true);
+              //console.log(response)
+              //console.log(response.status)
+            })
+            .catch(error => {
+              console.log(error.response.data.message);
+              alert("There was a problem with the registration. Please try again.\n" + "Error: " + error.response.data.message);
+            })
+          // database.push({
+          //     username: userName.value,
+          //     password: pass.value
+          // });
+          // console.log(database);
+          
+          }
   };
 
   const renderErrorMessage = (name) =>
@@ -64,7 +79,7 @@ else {
         </div>
         <div className="input-container">
           <label>Username </label>
-          <input type="text" name="uname" required />
+          <input type="text" name="userName" required />
         </div>
         <div className="input-container">
           <label>Password </label>
@@ -72,12 +87,12 @@ else {
           {renderErrorMessage("pass")}
         </div>
         <div className="input-container">
-          <label>Name </label>
-          <input type="text" name="name" required />
+          <label>First name </label>
+          <input type="text" name="firstName" required />
         </div>
         <div className="input-container">
-          <label>Faculty </label>
-          <input type="text" name="faculty" required />
+          <label>Last name </label>
+          <input type="text" name="lastName" required />
         </div>
         <div className="button-container">
           <input type="submit" />
@@ -95,7 +110,7 @@ else {
 
       <div className="login-form">
         <h1 className="title">Register</h1>
-        {isSubmitted ? <h2>User is successfully registered!</h2> : renderForm}
+        {isSubmitted ? <h2>{message}</h2> : renderForm}
       </div>
     </div>
   );
