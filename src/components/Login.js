@@ -44,6 +44,13 @@ function Login() {
       <div className="error">{errorMessages.message}</div>
     );
 
+  const resetpass = (event) => {
+      window.location.pathname = "/resetpassword";
+    }
+  const registerbut = (event) => {
+      window.location.pathname = "/register";
+    }
+
   // JSX code for login form
   const renderForm = (
     <div className="form">
@@ -58,10 +65,16 @@ function Login() {
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>
+        <br></br>
         <div className="button-container">
           <input type="submit" />
         </div>
       </form>
+      <br></br>
+      <div className="buttons-login">
+      <button className="button-logout" onClick={resetpass}>Forgot password</button>
+      <button className="button-logout" onClick={registerbut}>Register</button>
+      </div>
     </div>
   );
 

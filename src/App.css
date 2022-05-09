@@ -3,20 +3,15 @@ padding: 0;
 }
 
 .text-link {
-  color: black;
+  color: #a79e84;
   text-decoration: none;
+}
+.text-link:hover{
+  color: #8b6f47;
 }
 
 .center {
   font-size: 50px;
-}
-
-.header-element{
-  text-decoration: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 20%;
 }
 
 .homepage {
@@ -35,7 +30,7 @@ padding: 0;
 }
 
 .desctext {
-  color: #01d28e;
+  color: #bd5734;
 }
 
 .homedescription {
@@ -55,14 +50,14 @@ body{
 }
 
 .header{
+  font-size: small;
   text-decoration: none;
   width: 100vw;
-  height: 10vh;
-  background-color: rgba(255,255,255,0.5);
-  color:rgb(255,255,255);
+  height: 7vh;
+  background-color: #454140;
   display: flex;
-  border-bottom: 5px solid black;
-  justify-content: space-between;
+  border-bottom: 5px solid #a79e84;
+  justify-content:space-between;
   align-items: center;
 }
 
@@ -88,35 +83,42 @@ input[type="password"] {
 
 input[type="submit"] {
   margin-top: 10px;
+  width: 160px;
   cursor: pointer;
   font-size: 15px;
-  background: #01d28e;
-  border: 1px solid #01d28e;
+  background: #7a3b2e;
+  border: 1px solid #7a3b2e;
   color: #fff;
   padding: 10px 20px;
 }
 
 input[type="submit"]:hover {
-  background: #6cf0c2;
+  background: #bd5734;
 }
 
 .button-logout {
   margin-top: 10px;
   cursor: pointer;
+  width: 160px;
   font-size: 15px;
-  background: #01d28e;
-  border: 1px solid #01d28e;
+  background: #7a3b2e;
+  border: 1px solid #7a3b2e;
   color: #fff;
   padding: 10px 20px;
 }
 
 .button-logout:hover {
-  background: #6cf0c2;
+  background: #bd5734;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
+}
+
+.buttons-login {
+  display: flex;
+  justify-content:space-evenly
 }
 
 .login-form {
@@ -137,7 +139,7 @@ input[type="submit"]:hover {
 
 .title {
   font-size: 30px;
-  color: #01d28e;
+  color: #bd5734;
   margin-bottom: 20px;
   align-items: center;
   justify-content: center;

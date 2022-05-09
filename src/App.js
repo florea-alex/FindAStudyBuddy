@@ -7,6 +7,7 @@ import Home from './components/Home'
 import PageNotFound  from "./components/404";
 import Dashboard from "./components/Dashboard";
 import { Route, Routes} from 'react-router-dom';
+import ResetPassword from './components/ResetPassword'
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/resetpassword' element={<ResetPassword/>} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
