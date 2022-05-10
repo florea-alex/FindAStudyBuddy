@@ -12,8 +12,8 @@ using ProiectMDS.DAL;
 namespace ProiectMDS.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220414100028_AddedUserServices+Configuration")]
-    partial class AddedUserServicesConfiguration
+    [Migration("20220509124723_AddedProfileCourses")]
+    partial class AddedProfileCourses
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -170,11 +170,6 @@ namespace ProiectMDS.DAL.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Faculty")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -208,6 +203,9 @@ namespace ProiectMDS.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -228,6 +226,9 @@ namespace ProiectMDS.DAL.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("ProfileId")
+                        .IsUnique();
+
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
@@ -244,6 +245,97 @@ namespace ProiectMDS.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Courses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Credit")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProfileId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("courseName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("City")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("County")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int?>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Profile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("University")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("phoneNumber")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<int>("yearOfStudy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId")
+                        .IsUnique()
+                        .HasFilter("[LocationId] IS NOT NULL");
+
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -282,6 +374,17 @@ namespace ProiectMDS.DAL.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Auth.User", b =>
+                {
+                    b.HasOne("ProiectMDS.DAL.Entities.Profile", "Profile")
+                        .WithOne("User")
+                        .HasForeignKey("ProiectMDS.DAL.Entities.Auth.User", "ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("ProiectMDS.DAL.Entities.Auth.UserRole", b =>
                 {
                     b.HasOne("ProiectMDS.DAL.Entities.Auth.Role", "Role")
@@ -301,6 +404,26 @@ namespace ProiectMDS.DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Courses", b =>
+                {
+                    b.HasOne("ProiectMDS.DAL.Entities.Profile", "Profile")
+                        .WithMany("Courses")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Profile", b =>
+                {
+                    b.HasOne("ProiectMDS.DAL.Entities.Location", "Address")
+                        .WithOne("Profile")
+                        .HasForeignKey("ProiectMDS.DAL.Entities.Profile", "LocationId");
+
+                    b.Navigation("Address");
+                });
+
             modelBuilder.Entity("ProiectMDS.DAL.Entities.Auth.Role", b =>
                 {
                     b.Navigation("UserRoles");
@@ -309,6 +432,20 @@ namespace ProiectMDS.DAL.Migrations
             modelBuilder.Entity("ProiectMDS.DAL.Entities.Auth.User", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Location", b =>
+                {
+                    b.Navigation("Profile")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Profile", b =>
+                {
+                    b.Navigation("Courses");
+
+                    b.Navigation("User")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

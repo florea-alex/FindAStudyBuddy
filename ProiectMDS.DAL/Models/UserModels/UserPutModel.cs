@@ -10,6 +10,5 @@ namespace ProiectMDS.DAL.Models.UserModels
     {
         public string FirstName { get; set; } //momentan doar atat poate sa modifice
         public string LastName { get; set; }
-        public string Faculty { get; set; }
     }
 }

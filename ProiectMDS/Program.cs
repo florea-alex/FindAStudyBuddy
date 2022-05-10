@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -24,13 +25,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         B => B.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
 });
 
-builder.Services.AddSingleton<IUriServices>(o =>
-{
-    var accesor = o.GetRequiredService<IHttpContextAccessor>();
-    var request = accesor.HttpContext.Request;
-    var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
-    return new UriServices(uri);
-});
 
 builder.Services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<AppDbContext>()
@@ -111,6 +105,13 @@ builder.Services.AddSwaggerGen(opt =>
 builder.Services.AddServices();
 builder.Services.AddTransient<ITokenHelper, TokenHelper>(); //probleme cu ele in extensie, le las aici
 builder.Services.AddTransient<IAuthManager, AuthManager>();
+builder.Services.AddSingleton<IUriServices>(o => //pentru paginare
+{
+    var accesor = o.GetRequiredService<IHttpContextAccessor>();
+    var request = accesor.HttpContext.Request;
+    var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+    return new UriServices(uri);
+});
 
 //Call Seeders
 builder.Services.AddTransient<RoleSeeder>();
@@ -127,7 +128,7 @@ var app = builder.Build();
 SeedInjection(app);
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

@@ -11,6 +11,7 @@ namespace ProiectMDS.Services
         public bool Success { get; set; }
         public string AccesToken { get; set; }
         public string RefreshToken { get; set; }
-        public string Role { get; set; }
+        public string? Role { get; set; }
+        public int Id { get; set; }
     }
 }

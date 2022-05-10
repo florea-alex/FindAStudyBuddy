@@ -15,5 +15,6 @@ namespace ProiectMDS.Services.UserServices
         Task<Response<UserGetModel>> GetById(int id);
         Task Update(UserPutModel model, int id);
         Task Delete(int id);
+        Task<Response<ResetPassModel>> ChangeEmail(ChangeEmailModel changeEmailModel);
     }
 }

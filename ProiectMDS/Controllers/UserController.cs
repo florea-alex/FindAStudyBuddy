@@ -10,7 +10,7 @@ namespace ProiectMDS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private readonly IUserService _userServices;
@@ -53,5 +53,13 @@ namespace ProiectMDS.Controllers
 
             return Ok("Deleted succesfully");
         }
+
+        [HttpPost("Change-Email")]
+        public async Task<IActionResult> ChangeEmail(ChangeEmailModel changeEmailModel)
+        {
+            var result = await _userServices.ChangeEmail(changeEmailModel);
+
+            return Ok(result);
+        }   
     }
 }

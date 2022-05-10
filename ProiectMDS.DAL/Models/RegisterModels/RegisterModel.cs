@@ -16,9 +16,8 @@ namespace ProiectMDS.DAL.Models.RegisterModels
         [Required(ErrorMessage = "Password is required")]
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Faculty { get; set; }
+        //public string Faculty { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-        public DateTime DateCreated { get; set; }
     }
 }

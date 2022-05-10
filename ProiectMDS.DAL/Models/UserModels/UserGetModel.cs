@@ -13,7 +13,6 @@ namespace ProiectMDS.DAL.Models.UserModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Faculty { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
     }

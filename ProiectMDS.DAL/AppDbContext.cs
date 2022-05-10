@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProiectMDS.DAL.Configurations;
+using ProiectMDS.DAL.Entities;
 using ProiectMDS.DAL.Entities.Auth;
 using System;
 using System.Collections.Generic;
@@ -25,13 +26,19 @@ namespace ProiectMDS.DAL
         {
         }
 
-        DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> Profiles { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Courses> Courses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new UserConfig());
+            modelBuilder.ApplyConfiguration(new ProfileConfig());
+            modelBuilder.ApplyConfiguration(new LocationConfig());
+            modelBuilder.ApplyConfiguration(new CoursesConfig());
 
             modelBuilder.Entity<User>(b =>
             {
