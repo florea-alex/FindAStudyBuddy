@@ -26,6 +26,8 @@ function Login() {
             if (response.status != 200) {
                 alert("There was a problem with the registration. Please try again.");
               }
+              console.log(response);
+              localStorage.setItem("userId", response.data.id);
               localStorage.setItem("isAuthenticated", "true");
               console.log(localStorage)
               setIsSubmitted(true);
@@ -79,6 +81,8 @@ function Login() {
   );
 
   const navigate = useNavigate();
+  
+  var flag = localStorage.getItem("isAuthenticated");
 
   return (
       <div className='login-page'>
@@ -87,13 +91,16 @@ function Login() {
         <br></br>
         <br></br>
         <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+    {flag == "true" ?
+    <div className='homedescription'>
+    <h1 className='desctext'>You are already logged in.</h1>
+    </div>
+    : 
     <div className="login-form">
         <h1 className="title">Log In</h1>
         {isSubmitted ? navigate("/dashboard") : renderForm}
       </div>
+  }
       </div>
   )
 }

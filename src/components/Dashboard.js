@@ -2,15 +2,9 @@ import React from 'react'
 
 function Dashboard() {
 
-  const handleLogout = (event) => {
-    localStorage.clear();
-    window.location.pathname = "/";
-    console.log(localStorage);
-  }
-
   var flag = localStorage.getItem("isAuthenticated");
-
   return (
+    
     <div >
     <br></br>
     <br></br>
@@ -27,9 +21,6 @@ function Dashboard() {
         </div>
           <br></br>
           <br></br>
-          <div className="button-container">
-          <button className="button-logout" onClick={handleLogout}>Logout</button>
-          </div>
     </div>
     :
     <div className='homedescription'>
