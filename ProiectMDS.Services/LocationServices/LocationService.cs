@@ -34,6 +34,8 @@ namespace ProiectMDS.Services.LocationServices
 
             if (profile == null) { throw new KeyNotFoundException($"User {userId} has no profile yet"); }
 
+            if (profile.LocationId != null) { throw new Exception("There's already a location added for this user, you can update it"); }
+
             var location = _mapper.Map<Location>(model);
 
             profile.LocationId = location.Id;

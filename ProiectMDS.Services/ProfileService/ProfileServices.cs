@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using ProiectMDS.DAL;
 using ProiectMDS.DAL.Entities;
+using ProiectMDS.DAL.Models.CourseModels;
+using ProiectMDS.DAL.Models.LocationModels;
 using ProiectMDS.DAL.Models.ProfileModels;
 using ProiectMDS.DAL.Models.UserModels;
 using System;
@@ -29,6 +31,8 @@ namespace ProiectMDS.Services.ProfileService
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
             if (user == null) { throw new KeyNotFoundException($"There is no user with id {userId}"); }
+
+            if (user.ProfileId != null) { throw new Exception("There's aleady a profile created for this user, you can update it"); }
 
             var profile = _mapper.Map<UserProfile>(model);
 
@@ -63,11 +67,24 @@ namespace ProiectMDS.Services.ProfileService
 
             if (profile == null) { throw new KeyNotFoundException($"User {userId} has no profile yet"); }
 
-            //var location = await _context.Locations.FirstOrDefaultAsync(x => x.Id == profile.LocationId);
+            var location = await _context.Locations.AsNoTracking().FirstOrDefaultAsync(x => x.Id == profile.LocationId);
 
-            //if (location != null) { profile.Address = location; }
+            var courses = await _context.Courses.Where(x => x.ProfileId == profile.Id).AsNoTracking().ToListAsync();
 
             var profileGetModel = _mapper.Map<ProfileGetModel>(profile);
+
+            if (location != null) { profileGetModel.Address = _mapper.Map<LocationGetModel>(location); }
+
+            if (courses != null)
+            { 
+                var coursesGetModel = new List<CourseGetModel>();
+                foreach (var course in courses)
+                {
+                    coursesGetModel.Add(_mapper.Map<CourseGetModel>(course));
+                }
+
+                profileGetModel.Courses = coursesGetModel;
+            }
 
             return new Response<ProfileGetModel>(profileGetModel);
         }

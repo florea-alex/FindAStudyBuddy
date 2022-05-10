@@ -1,4 +1,6 @@
 ﻿using ProiectMDS.DAL.Entities;
+using ProiectMDS.DAL.Models.CourseModels;
+using ProiectMDS.DAL.Models.LocationModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ namespace ProiectMDS.DAL.Models.ProfileModels
         public int yearOfStudy { get; set; }
         public string? Description { get; set; }
         public string? phoneNumber { get; set; }
-        public Location Address { get; set; }
-        public ICollection<Courses> Courses { get; set; }
+        public LocationGetModel Address { get; set; }
+        public ICollection<CourseGetModel> Courses { get; set; }
     }
 }

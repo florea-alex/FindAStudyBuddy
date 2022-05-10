@@ -14,6 +14,7 @@ using ProiectMDS.Services.Managers;
 using ProiectMDS.Services.UriServices;
 using ProiectMDS.Services.UriServicess;
 using System.Text;
+using System.Text.Json.Serialization;
 using Utils;
 using Utils.Mappings;
 
@@ -100,6 +101,10 @@ builder.Services.AddSwaggerGen(opt =>
         }
     });
 });
+
+//Cycle detection
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 //Call services
 builder.Services.AddServices();
