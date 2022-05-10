@@ -8,8 +8,8 @@ namespace ProiectMDS.DAL.Models.CourseModels
 {
     public class CourseGetModel
     {
+        public int Id { get; set; }
         public string courseName { get; set; }
         public int Credit { get; set; }
-        public int? ProfileId { get; set; }
     }
 }

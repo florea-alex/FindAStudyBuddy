@@ -3,12 +3,16 @@ using Microsoft.EntityFrameworkCore;
 using ProiectMDS.DAL;
 using ProiectMDS.DAL.Entities;
 using ProiectMDS.DAL.Models.CourseModels;
+using ProiectMDS.DAL.Models.UserModels;
+using ProiectMDS.Services.UriServicess;
+using ProiectSoft.BLL.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Utils.Wrappers;
+using Utils.Wrappers.Filters;
 
 namespace ProiectMDS.Services.CourseServices
 {
@@ -16,11 +20,13 @@ namespace ProiectMDS.Services.CourseServices
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IUriServices _uriServices;
 
-        public CourseService(AppDbContext appDbContext, IMapper mapper)
+        public CourseService(AppDbContext appDbContext, IMapper mapper, IUriServices uriServices)
         {
             _context = appDbContext;
             _mapper = mapper;
+            _uriServices = uriServices;
         }
         public async Task Create(CoursePostModel model, int userId)
         {
@@ -53,7 +59,7 @@ namespace ProiectMDS.Services.CourseServices
 
             if (courses.Count == 0) { throw new Exception("There is no course that I can delete"); }
 
-            courses.RemoveRange(0, courses.Count);
+            _context.Courses.RemoveRange(courses);
             await _context.SaveChangesAsync();
         }
 
@@ -108,6 +114,46 @@ namespace ProiectMDS.Services.CourseServices
 
             _mapper.Map<CoursePutModel, Courses>(model, course);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<PagedResponse<List<CourseGetModel>>> GetAll(int userId, CoursesFilter filter, string route)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null) { throw new KeyNotFoundException($"There is no user with id {userId}"); }
+
+            var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.Id == user.ProfileId);
+
+            if (profile == null) { throw new KeyNotFoundException($"User {userId} has no profile completed yet"); }
+
+            IQueryable<Courses> courses = _context.Courses.Where(x => x.ProfileId == profile.Id);
+
+            if (!string.IsNullOrEmpty(filter.searchName))
+            {
+                courses = courses.Where(x => x.courseName!.Contains(filter.searchName));
+            }
+
+            switch (filter.orderBy)
+            {
+                case "Name":
+                    courses = !filter.descending == false ? courses.OrderBy(x => x.courseName) : courses.OrderByDescending(x => x.courseName);
+                    break;
+                default:
+                    courses = !filter.descending == false ? courses.OrderBy(s => s.Id) : courses.OrderByDescending(x => x.Id);
+                    break;
+            }
+
+            var coursesModels = courses
+                .Skip((filter.PageNumber - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .Select(_mapper.Map<CourseGetModel>)
+                .ToList();
+
+            var usersListCount = await _context.Users.CountAsync();
+
+            var pagedResponse = PaginationHelper.CreatePagedReponse<CourseGetModel>(coursesModels, filter, usersListCount, _uriServices, route);
+
+            return pagedResponse;
         }
     }
 }

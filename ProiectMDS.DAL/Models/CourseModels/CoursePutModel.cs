@@ -10,6 +10,5 @@ namespace ProiectMDS.DAL.Models.CourseModels
     {
         public string courseName { get; set; }
         public int Credit { get; set; }
-        public int? ProfileId { get; set; }
     }
 }

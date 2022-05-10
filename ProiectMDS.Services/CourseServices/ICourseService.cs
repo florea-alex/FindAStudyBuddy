@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Utils.Wrappers;
+using Utils.Wrappers.Filters;
 
 namespace ProiectMDS.Services.CourseServices
 {
@@ -15,5 +16,6 @@ namespace ProiectMDS.Services.CourseServices
         Task Update(CoursePutModel model, int userId, int courseId);
         Task DeleteAll(int userId);
         Task Delete(int userId, int courseId);
+        Task<PagedResponse<List<CourseGetModel>>> GetAll(int userId, CoursesFilter filter, string route);
     }
 }

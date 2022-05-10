@@ -2,6 +2,7 @@
 using ProiectMDS.DAL.Models.CourseModels;
 using ProiectMDS.Services.CourseServices;
 using System.ComponentModel.DataAnnotations;
+using Utils.Wrappers.Filters;
 
 namespace ProiectMDS.Controllers
 {
@@ -56,5 +57,14 @@ namespace ProiectMDS.Controllers
             return Ok("Deleted succesfully");
         }
 
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll([FromQuery] int userId,[FromQuery] CoursesFilter filter)
+        {
+            var route = Request.Path.Value;
+
+            var users = await _course.GetAll(userId, filter, route);
+
+            return Ok(users);
+        }
     }
 }
