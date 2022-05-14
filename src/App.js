@@ -10,8 +10,11 @@ import { Route, Routes} from 'react-router-dom';
 import ResetPassword from './components/ResetPassword'
 import './App.css';
 import Profile from "./components/Profile";
+import Courses from "./components/Courses"
 import Profile2 from "./components/Profile2";
 import Logout from "./components/Logout";
+import Addcourseneed from "./components/AddCourseNeed";
+import Addcourseoffer from "./components/AddCourseOffer";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/resetpassword' element={<ResetPassword/>} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/courses' element={<Courses />} />
+        <Route path='/addcourseneed' element={<Addcourseneed/>}/>
+        <Route path='/addcourseoffer' element={<Addcourseoffer/>}/>
         <Route path='/profile' element={<Profile2 />} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>

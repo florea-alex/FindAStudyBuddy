@@ -1,12 +1,15 @@
 import React from 'react'
+import Main from './SwipeCarousel/Main';
+import {RemoveScrollBar} from 'react-remove-scroll-bar';
 
 function Dashboard() {
 
   var flag = localStorage.getItem("isAuthenticated");
   return (
-    
-    <div >
-    <br></br>
+    <div className='swipe'>
+      <RemoveScrollBar />
+      <Main />
+    {/* <br></br>
     <br></br>
     <br></br>
     <br></br>
@@ -29,9 +32,8 @@ function Dashboard() {
       <br></br>
       <div>Please log in to see the content of the app.</div>
     </div>
-    }
-    
-        
+    } */}
+  
   </div>
   )
 }
