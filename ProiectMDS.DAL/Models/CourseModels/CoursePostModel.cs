@@ -9,6 +9,7 @@ namespace ProiectMDS.DAL.Models.CourseModels
     public class CoursePostModel
     {
         public string courseName { get; set; }
+        public bool Helper { get; set; }
         public int Credit { get; set; }
     }
 }

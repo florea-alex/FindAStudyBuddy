@@ -8,11 +8,11 @@ namespace ProiectMDS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CourseController : Controller
+    public class ProfileCoursesController : Controller
     {
         private readonly ICourseService _course;
 
-        public CourseController(ICourseService course)
+        public ProfileCoursesController(ICourseService course)
         {
             _course = course;
         }
@@ -58,7 +58,7 @@ namespace ProiectMDS.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll([FromQuery] int userId,[FromQuery] CoursesFilter filter)
+        public async Task<IActionResult> GetAll([FromQuery] int userId, [FromQuery] CoursesFilter filter)
         {
             var route = Request.Path.Value;
 

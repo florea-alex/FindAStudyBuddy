@@ -2,6 +2,7 @@
 using ProiectMDS.Services.CourseServices;
 using ProiectMDS.Services.EmailService;
 using ProiectMDS.Services.LocationServices;
+using ProiectMDS.Services.PhotosService;
 using ProiectMDS.Services.ProfileService;
 using ProiectMDS.Services.UserServices;
 using System;
@@ -21,6 +22,8 @@ namespace ProiectMDS.Services
             services.AddTransient<IProfileServices, ProfileServices>();
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<IBaseCourseService, BaseCourseService>();
+            services.AddTransient<IPhotoService, PhotoService>();
         }
     }
 }

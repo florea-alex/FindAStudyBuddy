@@ -12,8 +12,8 @@ using ProiectMDS.DAL;
 namespace ProiectMDS.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220509121220_SomeModifications")]
-    partial class SomeModifications
+    [Migration("20220511231816_AOLOOOOOOOOOOOOOO")]
+    partial class AOLOOOOOOOOOOOOOO
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -203,7 +203,7 @@ namespace ProiectMDS.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ProfileId")
+                    b.Property<int?>("ProfileId")
                         .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
@@ -227,7 +227,8 @@ namespace ProiectMDS.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("ProfileId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ProfileId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -245,6 +246,33 @@ namespace ProiectMDS.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Courses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Credit")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProfileId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("courseName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("ProiectMDS.DAL.Entities.Location", b =>
@@ -275,7 +303,7 @@ namespace ProiectMDS.DAL.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("ProiectMDS.DAL.Entities.Profile", b =>
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.UserProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -349,11 +377,9 @@ namespace ProiectMDS.DAL.Migrations
 
             modelBuilder.Entity("ProiectMDS.DAL.Entities.Auth.User", b =>
                 {
-                    b.HasOne("ProiectMDS.DAL.Entities.Profile", "Profile")
+                    b.HasOne("ProiectMDS.DAL.Entities.UserProfile", "Profile")
                         .WithOne("User")
-                        .HasForeignKey("ProiectMDS.DAL.Entities.Auth.User", "ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProiectMDS.DAL.Entities.Auth.User", "ProfileId");
 
                     b.Navigation("Profile");
                 });
@@ -377,11 +403,22 @@ namespace ProiectMDS.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProiectMDS.DAL.Entities.Profile", b =>
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.Courses", b =>
+                {
+                    b.HasOne("ProiectMDS.DAL.Entities.UserProfile", "Profile")
+                        .WithMany("Courses")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.UserProfile", b =>
                 {
                     b.HasOne("ProiectMDS.DAL.Entities.Location", "Address")
                         .WithOne("Profile")
-                        .HasForeignKey("ProiectMDS.DAL.Entities.Profile", "LocationId");
+                        .HasForeignKey("ProiectMDS.DAL.Entities.UserProfile", "LocationId");
 
                     b.Navigation("Address");
                 });
@@ -402,8 +439,10 @@ namespace ProiectMDS.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProiectMDS.DAL.Entities.Profile", b =>
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.UserProfile", b =>
                 {
+                    b.Navigation("Courses");
+
                     b.Navigation("User")
                         .IsRequired();
                 });

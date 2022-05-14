@@ -10,6 +10,7 @@ namespace ProiectMDS.DAL.Models.CourseModels
     {
         public int Id { get; set; }
         public string courseName { get; set; }
+        public bool Helper { get; set; }
         public int Credit { get; set; }
     }
 }

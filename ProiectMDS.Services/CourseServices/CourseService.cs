@@ -33,10 +33,14 @@ namespace ProiectMDS.Services.CourseServices
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
             if (user == null) { throw new KeyNotFoundException($"There is no user with id {userId}"); }
-        
+
             var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.Id == user.ProfileId);
 
             if (profile == null) { throw new KeyNotFoundException($"User {userId} has no profile completed yet"); }
+
+            var courses = _context.Courses.Where(x => x.ProfileId == profile.Id).Any(x => x.courseName == model.courseName);
+
+            if (courses) { throw new Exception("You have already entered this course!"); }
 
             var course = _mapper.Map<Courses>(model);
             course.ProfileId = user.ProfileId;

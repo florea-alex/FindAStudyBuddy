@@ -36,6 +36,11 @@ namespace ProiectMDS.DAL.Configurations
 
             builder.HasMany(x => x.Courses)
                 .WithOne(x => x.Profile);
+
+            builder.Property(x => x.Photo)
+                .HasColumnType("nvarchar(150)")
+                .HasMaxLength(150)
+                .IsRequired(false);
         }
     }
 }

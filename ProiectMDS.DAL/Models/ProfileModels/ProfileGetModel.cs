@@ -16,6 +16,7 @@ namespace ProiectMDS.DAL.Models.ProfileModels
         public int yearOfStudy { get; set; }
         public string? Description { get; set; }
         public string? phoneNumber { get; set; }
+        public string? Photo { get; set; }
         public LocationGetModel Address { get; set; }
         public ICollection<CourseGetModel> Courses { get; set; }
     }

@@ -76,7 +76,7 @@ namespace ProiectMDS.Services.ProfileService
             if (location != null) { profileGetModel.Address = _mapper.Map<LocationGetModel>(location); }
 
             if (courses != null)
-            { 
+            {
                 var coursesGetModel = new List<CourseGetModel>();
                 foreach (var course in courses)
                 {

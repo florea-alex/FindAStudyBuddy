@@ -2,6 +2,7 @@
 using ProiectMDS.DAL.Entities;
 using ProiectMDS.DAL.Entities.Auth;
 using ProiectMDS.DAL.Models;
+using ProiectMDS.DAL.Models.BaseCourseModel;
 using ProiectMDS.DAL.Models.CourseModels;
 using ProiectMDS.DAL.Models.LocationModels;
 using ProiectMDS.DAL.Models.ProfileModels;
@@ -34,6 +35,10 @@ namespace Utils.Mappings
             CreateMap<Courses, CoursePostModel>().ReverseMap();
             CreateMap<Courses, CoursePutModel>().ReverseMap();
             CreateMap<Courses, CourseGetModel>().ReverseMap();
+
+            CreateMap<BaseCourses, BaseGetModel>().ReverseMap();
+            CreateMap<BaseCourses, BasePostModel>().ReverseMap();
+            CreateMap<BaseCourses, BasePutModel>().ReverseMap();
         }
     }
 }

@@ -110,6 +110,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddServices();
 builder.Services.AddTransient<ITokenHelper, TokenHelper>(); //probleme cu ele in extensie, le las aici
 builder.Services.AddTransient<IAuthManager, AuthManager>();
+
 builder.Services.AddSingleton<IUriServices>(o => //pentru paginare
 {
     var accesor = o.GetRequiredService<IHttpContextAccessor>();
@@ -120,6 +121,7 @@ builder.Services.AddSingleton<IUriServices>(o => //pentru paginare
 
 //Call Seeders
 builder.Services.AddTransient<RoleSeeder>();
+
 
 //Add mappers
 

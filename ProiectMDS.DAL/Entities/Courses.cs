@@ -11,6 +11,7 @@ namespace ProiectMDS.DAL.Entities
         public int Id { get; set; }
         public string courseName { get; set; }
         public int Credit { get; set; }
+        public bool Helper { get; set; }
         public int? ProfileId { get; set; }
         public virtual UserProfile Profile { get; set; }
     }

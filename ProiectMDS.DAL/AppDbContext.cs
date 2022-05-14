@@ -30,6 +30,7 @@ namespace ProiectMDS.DAL
         public DbSet<UserProfile> Profiles { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Courses> Courses { get; set; }
+        public DbSet<BaseCourses> BaseCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,6 +40,7 @@ namespace ProiectMDS.DAL
             modelBuilder.ApplyConfiguration(new ProfileConfig());
             modelBuilder.ApplyConfiguration(new LocationConfig());
             modelBuilder.ApplyConfiguration(new CoursesConfig());
+            modelBuilder.ApplyConfiguration(new BaseCourseConfig());
 
             modelBuilder.Entity<User>(b =>
             {

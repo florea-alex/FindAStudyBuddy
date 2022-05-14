@@ -16,8 +16,8 @@ namespace ProiectMDS.DAL.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.courseName)
-                .HasColumnType("nvarchar(30)")
-                .HasMaxLength(30);
+                .HasColumnType("nvarchar(50)")
+                .HasMaxLength(50);
         }
     }
 }
