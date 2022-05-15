@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import FileUpload from './FileUpload';
 class Profile2 extends Component {
     constructor(props) {
       super(props)
@@ -14,6 +15,7 @@ class Profile2 extends Component {
         courses: [],
         cursuri: [],
         nume: '',
+        link: '',
         prenume: '',
       }
 
@@ -44,6 +46,13 @@ class Profile2 extends Component {
         var nume = data1.data.data.lastName;
         var prenume = data1.data.data.firstName;
         this.setState({nume: nume, prenume: prenume});
+
+        var link3 = "https://findastudybuddy.azurewebsites.net/api/Photos/Get-Image?userId="+id;
+        var photolink = "";
+        var data2 = await axios.get(link3)
+        photolink = data2.data.data;
+        console.log(photolink);
+        this.setState({link: photolink});
     }
     
     async updateprofile() {
@@ -183,17 +192,51 @@ class Profile2 extends Component {
       setTimeout(() => {window.location.pathname = "/profile";}, 1000);
     }
 
+    async uploadAction() {
+      var data = new FormData();
+      var imagedata = document.querySelector('input[type="file"]').files[0];
+      data.append("data", imagedata);
+      for (var pair of data.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]); 
+    }
+
+      var obj = await axios.post("https://findastudybuddy.azurewebsites.net/api/Photos/Add-Image?userId=2", data)
+      .then(response => {
+        console.log(response);
+      })
+      .then(error => {
+        console.log(error);
+      })
+
+    }
+
+    async getphoto() {
+      var id = localStorage.getItem("userId");
+      var link = "https://findastudybuddy.azurewebsites.net/api/Photos/Get-Image?userId="+id;
+      var photolink = "";
+      var data = await axios.get(link)
+      .then(response => {
+        console.log(response);
+        photolink = response.data.data;
+        this.setState({link: photolink});
+      })
+      .then(error => {
+        console.log(error);
+      })
+
+    }
+
     render(){
-        const {profile, university, yearOfStudy, phoneNumber, description, address, courses, cursuri, nume, prenume} = this.state
+        const {profile, university, yearOfStudy, phoneNumber, description, address, courses, cursuri, nume, prenume, linkpoza} = this.state
         var flag = localStorage.getItem("isAuthenticated");
         const obj = profile.data
-        console.log(cursuri)
         return (
           <div>
           {
             flag == "true" ?
         <div className='homedescription'>
           <h1 className='desctext'>Profile</h1>
+          <div id='poza'><img src={linkpoza} /></div>
           <br></br>
           <h2 style={{color: "#7a3b2e"}}>{prenume} {nume}</h2>
           {obj != undefined ?
@@ -275,7 +318,11 @@ class Profile2 extends Component {
             <div>
               <button className="button-update" onClick={this.addcourse}>Go to courses</button>
             </div>
+            <div>
+              <button className="button-update" onClick={this.getphoto}>Get photo</button>
             </div>
+            </div>
+            <FileUpload />
           </div>
         :
         <div className='profiledesc'>
