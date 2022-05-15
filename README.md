@@ -13,4 +13,3 @@ User Stories:
 10. As an existing user with ongoing chats, I want to be able to save in my computer the files I receive.
 11. As a user, I would like to receive and offer help anytime.
 12. As a newly registered user, I would like to receive a confirmation email.
-sa
