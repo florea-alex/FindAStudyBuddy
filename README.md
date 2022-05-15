@@ -1,6 +1,6 @@
 # Find A Study Buddy
 
-User Stories:
+#### User Stories:
 1. As a user, I want to be able to create an account.
 2. As a newly registered user, I want to complete my profile.
 3. As an user with an existing account, I want to sign into the app so that I can connect with the other users.
