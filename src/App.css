@@ -352,6 +352,7 @@ input[type="submit"]:hover {
 
 .login-form {
   background-color: #f5f5df;
+  border-radius: 20px;
   width: 500px;
   padding: 2rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
