@@ -52,6 +52,35 @@ class FileUpload extends Component {
                 console.log(err);
             })
         }
+        setTimeout(() => {window.location.pathname = "/profile";}, 1000);
+    }
+
+    handleSubmitFileUpdate = () => {
+
+        if (this.state.image_file !== null){
+
+            let formData = new FormData();
+            formData.append('Files', this.state.image_file);
+            // the image field name should be similar to your api endpoint field name
+            // in my case here the field name is customFile
+
+            axios.put(
+                "https://findastudybuddy.azurewebsites.net/api/Photos/Update-Image?userId="+localStorage.getItem("userId"),
+                formData,
+                {
+                    headers: {
+                        "Content-type": "multipart/form-data",
+                    },                    
+                }
+            )
+            .then(res => {
+                console.log(`Success` + res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+        //setTimeout(() => {window.location.pathname = "/profile";}, 1000);
     }
 
     handleDelete = () => {
@@ -64,21 +93,32 @@ class FileUpload extends Component {
             .catch(err => {
                 console.log(err);
             })
+            localStorage.removeItem("link");
+        setTimeout(() => {window.location.pathname = "/profile";}, 1000);
     }
 
 
     // render from here
     render() { 
+        var link = localStorage.getItem("link");
         return (
-            <div>
+            <div className='profiledesc3'>
 
                 {/* image input field */}
-                <input
-                    type="file"
-                    onChange={this.handleImagePreview}
-                />
-                <input type="submit" onClick={this.handleSubmitFile} value="Upload photo"/>
+                
+                {link != "" ?
+                //<input type="submit" onClick={this.handleSubmitFileUpdate} value="Update photo"/>
                 <input type="submit" onClick={this.handleDelete} value="Delete photo"/>
+                :
+                <div className='profiledesc3'>
+                    <input
+                        type="file"
+                        onChange={this.handleImagePreview}
+                    />
+                    <input type="submit" onClick={this.handleSubmitFile} value="Upload photo"/>
+                </div>
+                }
+                
             </div>
         );
     }

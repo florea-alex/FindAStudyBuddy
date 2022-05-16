@@ -44,6 +44,25 @@ padding: 0;
   justify-content: center;
 }
 
+.homedescription4 {
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 30px;
+  background-color: #f5f5df;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.coloana2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
 .homedescription2 {
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -81,6 +100,13 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.profiledesc3{
+  padding: 20px;
+  padding-bottom: 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .button-update {
@@ -167,6 +193,20 @@ body{
 
 input{
   margin-top: 5px;
+}
+
+.pozaprofil {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.poza {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .profileitem1{

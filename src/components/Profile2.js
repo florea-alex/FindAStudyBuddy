@@ -51,7 +51,7 @@ class Profile2 extends Component {
         var photolink = "";
         var data2 = await axios.get(link3)
         photolink = data2.data.data;
-        console.log(photolink);
+        localStorage.setItem("link", photolink);
         this.setState({link: photolink});
     }
     
@@ -200,7 +200,7 @@ class Profile2 extends Component {
         console.log(pair[0]+ ', ' + pair[1]); 
     }
 
-      var obj = await axios.post("https://findastudybuddy.azurewebsites.net/api/Photos/Add-Image?userId=2", data)
+      var obj = await axios.post("https://findastudybuddy.azurewebsites.net/api/Photos/Add-Image?userId="+localStorage.getItem("userId"), data)
       .then(response => {
         console.log(response);
       })
@@ -230,15 +230,24 @@ class Profile2 extends Component {
         const {profile, university, yearOfStudy, phoneNumber, description, address, courses, cursuri, nume, prenume, linkpoza} = this.state
         var flag = localStorage.getItem("isAuthenticated");
         const obj = profile.data
+        console.log(localStorage.getItem("link"));
+        var link = localStorage.getItem("link");
         return (
           <div>
           {
             flag == "true" ?
-        <div className='homedescription'>
-          <h1 className='desctext'>Profile</h1>
-          <div id='poza'><img src={linkpoza} /></div>
-          <br></br>
-          <h2 style={{color: "#7a3b2e"}}>{prenume} {nume}</h2>
+        <div className='homedescription4'>
+          
+          <div id = "coloana1">
+          <div className='poza'>
+            <img className='pozaprofil' src={link}></img>
+            <h2 style={{color: "#7a3b2e"}}>{prenume} {nume}</h2>
+            </div>
+          
+          <FileUpload />
+          </div>
+          <div id = "coloana2">
+          <div className='profiledesc'><h1 className='desctext'>Profile</h1></div>
           {obj != undefined ?
           <div className='profiledesc'>
             <div className='profileitem1'>
@@ -318,11 +327,11 @@ class Profile2 extends Component {
             <div>
               <button className="button-update" onClick={this.addcourse}>Go to courses</button>
             </div>
-            <div>
+            {/* <div>
               <button className="button-update" onClick={this.getphoto}>Get photo</button>
+            </div> */}
             </div>
-            </div>
-            <FileUpload />
+            
           </div>
         :
         <div className='profiledesc'>
@@ -380,6 +389,7 @@ class Profile2 extends Component {
             </div>
           </div>
         }
+        </div>
         </div>
       :
       <div className='homedescription'>
