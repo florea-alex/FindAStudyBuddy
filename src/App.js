@@ -12,11 +12,12 @@ import './App.css';
 import Profile from "./components/Profile";
 import Courses from "./components/Courses"
 import Profile2 from "./components/Profile2";
-import Logout from "./components/Logout";
 import Addcourseneed from "./components/AddCourseNeed";
 import Addcourseoffer from "./components/AddCourseOffer";
+import Chat from "./components/Chat";
 
 function App() {
+  console.log(window.location.pathname);
   return (
     <div className="app">
       <Header />
@@ -27,12 +28,12 @@ function App() {
         <Route path='/resetpassword' element={<ResetPassword/>} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/courses' element={<Courses />} />
+        <Route path='/chat' element={<Chat />} />
         <Route path='/addcourseneed' element={<Addcourseneed/>}/>
         <Route path='/addcourseoffer' element={<Addcourseoffer/>}/>
         <Route path='/profile' element={<Profile2 />} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
-      <Logout />
     </div>
   );
 }

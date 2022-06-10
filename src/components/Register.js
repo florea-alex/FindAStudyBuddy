@@ -41,7 +41,7 @@ function Register() {
       }
       else {
 
-          axios.post('https://findastudybuddy.azurewebsites.net/api/Auth/Register', object)
+          axios.post('https://findastudybuddymds.azurewebsites.net/api/Auth/Register', object)
             .then(response => {
               if (response.status != 200) {
                 alert("There was a problem with the registration. Please try again.");

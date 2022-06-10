@@ -25,7 +25,7 @@ class Courses extends Component {
 
     async componentDidMount() {
         var id = localStorage.getItem("userId");
-        var link = "https://findastudybuddy.azurewebsites.net/api/Profile/GetById?userId="+id;
+        var link = "https://findastudybuddymds.azurewebsites.net/api/Profile/GetById?userId="+id;
         
         await axios.get(link)
       .then(response =>
@@ -40,7 +40,7 @@ class Courses extends Component {
             console.log(error);
         })
 
-        var data = await axios.get("https://findastudybuddy.azurewebsites.net/api/BaseCourses/GetAll");
+        var data = await axios.get("https://findastudybuddymds.azurewebsites.net/api/BaseCourses/GetAll");
         var cursuri = data.data.data;
         this.setState({cursuri: cursuri});
     }
@@ -103,7 +103,7 @@ class Courses extends Component {
                     {
                         cursuri.map(function(d, idx){
                         //return (<ul key={idx}>{d.helper == true && d.courseName}</ul>)
-                        return (<button onClick={() => {axios.post("https://findastudybuddy.azurewebsites.net/api/ProfileCourses/Add-Courses?userId="+id, {
+                        return (<button onClick={() => {axios.post("https://findastudybuddymds.azurewebsites.net/api/ProfileCourses/Add-Courses?userId="+id, {
                             "courseName": d.courseName,
                             "helper": false,
                             "credit": d.credit
@@ -130,7 +130,7 @@ class Courses extends Component {
                     {
                         cursuri.map(function(d, idx){
                         //return (<ul key={idx}>{d.helper == true && d.courseName}</ul>)
-                        return (<button onClick={() => {axios.post("https://findastudybuddy.azurewebsites.net/api/ProfileCourses/Add-Courses?userId="+id, {
+                        return (<button onClick={() => {axios.post("https://findastudybuddymds.azurewebsites.net/api/ProfileCourses/Add-Courses?userId="+id, {
                             "courseName": d.courseName,
                             "helper": true,
                             "credit": d.credit
@@ -155,7 +155,7 @@ class Courses extends Component {
                   {
                       cursuri.map(function(d, idx){
                       //return (<ul key={idx}>{d.helper == true && d.courseName}</ul>)
-                      return (<button onClick={() => {axios.post("https://findastudybuddy.azurewebsites.net/api/ProfileCourses/Add-Courses?userId="+id, {
+                      return (<button onClick={() => {axios.post("https://findastudybuddymds.azurewebsites.net/api/ProfileCourses/Add-Courses?userId="+id, {
                           "courseName": d.courseName,
                           "helper": false,
                           "credit": d.credit
@@ -177,7 +177,7 @@ class Courses extends Component {
                   {
                       cursuri.map(function(d, idx){
                       //return (<ul key={idx}>{d.helper == true && d.courseName}</ul>)
-                      return (<button onClick={() => {axios.post("https://findastudybuddy.azurewebsites.net/api/ProfileCourses/Add-Courses?userId="+id, {
+                      return (<button onClick={() => {axios.post("https://findastudybuddymds.azurewebsites.net/api/ProfileCourses/Add-Courses?userId="+id, {
                           "courseName": d.courseName,
                           "helper": true,
                           "credit": d.credit

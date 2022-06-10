@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import FileUpload from './FileUpload';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 class Profile2 extends Component {
     constructor(props) {
       super(props)
@@ -23,7 +25,7 @@ class Profile2 extends Component {
     }
     async componentDidMount() {
         var id = localStorage.getItem("userId");
-        var link = "https://findastudybuddy.azurewebsites.net/api/Profile/GetById?userId="+id;
+        var link = "https://findastudybuddymds.azurewebsites.net/api/Profile/GetById?userId="+id;
         
         await axios.get(link)
       .then(response =>
@@ -38,16 +40,16 @@ class Profile2 extends Component {
             console.log(error);
         })
 
-        var data = await axios.get("https://findastudybuddy.azurewebsites.net/api/BaseCourses/GetAll");
+        var data = await axios.get("https://findastudybuddymds.azurewebsites.net/api/BaseCourses/GetAll");
         var cursuri = data.data.data;
         this.setState({cursuri: cursuri});
 
-        var data1 = await axios.get("https://findastudybuddy.azurewebsites.net/api/User/GetById?id="+id);
+        var data1 = await axios.get("https://findastudybuddymds.azurewebsites.net/api/User/GetById?id="+id);
         var nume = data1.data.data.lastName;
         var prenume = data1.data.data.firstName;
         this.setState({nume: nume, prenume: prenume});
 
-        var link3 = "https://findastudybuddy.azurewebsites.net/api/Photos/Get-Image?userId="+id;
+        var link3 = "https://findastudybuddymds.azurewebsites.net/api/Photos/Get-Image?userId="+id;
         var photolink = "";
         var data2 = await axios.get(link3)
         photolink = data2.data.data;
@@ -69,13 +71,13 @@ class Profile2 extends Component {
       }
 
       var id = localStorage.getItem("userId");
-      var linkupdate = "https://findastudybuddy.azurewebsites.net/api/Profile/UpdateUserProfile?userId="+id;
+      var linkupdate = "https://findastudybuddymds.azurewebsites.net/api/Profile/UpdateUserProfile?userId="+id;
 
       var dataupdate = await axios.put(linkupdate, obj)
 
       console.log(dataupdate)
 
-      var link = "https://findastudybuddy.azurewebsites.net/api/Profile/GetById?userId="+id;
+      var link = "https://findastudybuddymds.azurewebsites.net/api/Profile/GetById?userId="+id;
 
       const dataget = await axios.get(link);
       // .then(response =>
@@ -114,13 +116,13 @@ class Profile2 extends Component {
       }
 
       var id = localStorage.getItem("userId");
-      var linkupdate = "https://findastudybuddy.azurewebsites.net/api/Profile/CreateUserProfile?userId="+id;
+      var linkupdate = "https://findastudybuddymds.azurewebsites.net/api/Profile/CreateUserProfile?userId="+id;
 
       var dataupdate = await axios.post(linkupdate, obj)
 
       console.log(dataupdate)
 
-      var link = "https://findastudybuddy.azurewebsites.net/api/Profile/GetById?userId="+id;
+      var link = "https://findastudybuddymds.azurewebsites.net/api/Profile/GetById?userId="+id;
 
       const dataget = await axios.get(link);
       // .then(response =>
@@ -147,7 +149,7 @@ class Profile2 extends Component {
 
     async addcourse() {
 
-      var data = await axios.get("https://findastudybuddy.azurewebsites.net/api/BaseCourses/GetAll");
+      var data = await axios.get("https://findastudybuddymds.azurewebsites.net/api/BaseCourses/GetAll");
       var obj = data.data.data;
       console.log(obj);
       window.location.pathname='/courses';
@@ -166,7 +168,7 @@ class Profile2 extends Component {
       };
       console.log(obj);
       var id = localStorage.getItem("userId");
-      var linkupdate = "https://findastudybuddy.azurewebsites.net/api/Location/UpdateLocation?userId="+id;
+      var linkupdate = "https://findastudybuddymds.azurewebsites.net/api/Location/UpdateLocation?userId="+id;
 
       var dataupdate = await axios.put(linkupdate, obj)
       console.log(dataupdate)
@@ -186,7 +188,7 @@ class Profile2 extends Component {
       };
      console.log(obj);
       var id = localStorage.getItem("userId");
-      var link = "https://findastudybuddy.azurewebsites.net/api/Location/AddLocation?userId="+id;
+      var link = "https://findastudybuddymds.azurewebsites.net/api/Location/AddLocation?userId="+id;
       var datapost = await axios.post(link, obj)
       console.log(datapost)
       setTimeout(() => {window.location.pathname = "/profile";}, 1000);
@@ -200,7 +202,7 @@ class Profile2 extends Component {
         console.log(pair[0]+ ', ' + pair[1]); 
     }
 
-      var obj = await axios.post("https://findastudybuddy.azurewebsites.net/api/Photos/Add-Image?userId="+localStorage.getItem("userId"), data)
+      var obj = await axios.post("https://findastudybuddymds.azurewebsites.net/api/Photos/Add-Image?userId="+localStorage.getItem("userId"), data)
       .then(response => {
         console.log(response);
       })
@@ -212,7 +214,7 @@ class Profile2 extends Component {
 
     async getphoto() {
       var id = localStorage.getItem("userId");
-      var link = "https://findastudybuddy.azurewebsites.net/api/Photos/Get-Image?userId="+id;
+      var link = "https://findastudybuddymds.azurewebsites.net/api/Photos/Get-Image?userId="+id;
       var photolink = "";
       var data = await axios.get(link)
       .then(response => {
@@ -226,10 +228,27 @@ class Profile2 extends Component {
 
     }
 
+    async handleDelete () {        
+      console.log("LSALDCSMLDCKDSMCSD");
+      var id = localStorage.getItem("userId");
+      localStorage.clear();
+      axios.delete("https://findastudybuddymds.azurewebsites.net/api/User/DeleteUser?id="+id)
+      .then(response =>
+        {
+            console.log(response);
+        })
+        .catch(error =>
+        {
+            console.log(error);
+        });
+        setTimeout(() => {window.location.pathname = "/";}, 1000);
+    }
+
     render(){
         const {profile, university, yearOfStudy, phoneNumber, description, address, courses, cursuri, nume, prenume, linkpoza} = this.state
         var flag = localStorage.getItem("isAuthenticated");
         const obj = profile.data
+        
         console.log(localStorage.getItem("link"));
         var link = localStorage.getItem("link");
         return (
@@ -240,7 +259,9 @@ class Profile2 extends Component {
           
           <div id = "coloana1">
           <div className='poza'>
+            { (link != null && link != "") &&
             <img className='pozaprofil' src={link}></img>
+            }
             <h2 style={{color: "#7a3b2e"}}>{prenume} {nume}</h2>
             </div>
           
@@ -331,6 +352,46 @@ class Profile2 extends Component {
               <button className="button-update" onClick={this.getphoto}>Get photo</button>
             </div> */}
             </div>
+            <Popup
+              trigger={<button className="button-logout4">Delete account</button>}
+              modal
+              nested
+            >
+              {close => (
+                <div className="modal">
+                  <button className="close" onClick={close}>
+                    &times;
+                  </button>
+                  <div className="header1">
+                    <h2>Delete account</h2></div>
+                  <div className='content'>
+                  <h3>
+                    Are you sure you want to delete your account?
+                  </h3>
+                  </div>
+                  <div className="actions">
+                  <button
+                      className="button-logout4"
+                      onClick={this.handleDelete}
+                    >
+                    Yes
+                    </button>
+                    <button
+                      className="button-logout5"
+                      onClick={() => {
+                        console.log('modal closed ');
+                        close();
+                      }}
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              )}
+            </Popup>
+            {/* <div>
+            <button className="button-logout4" onClick={this.handleDelete}>Delete account</button>
+            </div> */}
             
           </div>
         :
@@ -378,15 +439,57 @@ class Profile2 extends Component {
             <br></br>
             <div className='buttonsprofile'>
             <div>
-              <button className="button-update" onClick={this.addcourse}>Add course</button>
+              <button className="button-update" onClick={this.createaddress}>Add address</button>
             </div>
             <div>
               <button className="button-update1" onClick={this.createprofile}>Create profile</button>
             </div>
             <div>
-              <button className="button-update" onClick={this.addaddress}>Go to courses</button>
+              <button className="button-update" onClick={this.addcourse}>Go to courses</button>
             </div>
             </div>
+            <Popup
+              trigger={<button className="button-logout4">Delete account</button>}
+              modal
+              nested
+            >
+              {close => (
+                <div className="modal">
+                  <button className="close" onClick={close}>
+                    &times;
+                  </button>
+                  <div className="header1">
+                    <h2>Delete account</h2></div>
+                  <div className='content'>
+                  <h3>
+                    Are you sure you want to delete your account?
+                  </h3>
+                  </div>
+                  <div className="actions">
+                  <button
+                      className="button-logout4"
+                      onClick={this.handleDelete}
+                    >
+                    Yes
+                    </button>
+                    {/* <Popup
+                      trigger={<button className="button-logout4" onClick={this.handleDelete}>Yes</button>}
+                      position="top center"
+                    >
+                    </Popup> */}
+                    <button
+                      className="button-logout5"
+                      onClick={() => {
+                        console.log('modal closed ');
+                        close();
+                      }}
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              )}
+            </Popup>
           </div>
         }
         </div>

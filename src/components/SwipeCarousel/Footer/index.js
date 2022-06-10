@@ -11,7 +11,7 @@ export default function Footer({ handleChoice }) {
     <View style={styles.container}>
       <RoundButton
         name='../../../assets/x.png'
-        size={40}
+        size={34}
         color={'styles.container1'} 
         onPress={() => handleChoice(-1)}
       />

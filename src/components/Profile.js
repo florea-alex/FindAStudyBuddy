@@ -5,7 +5,7 @@ function Profile() {
       var id = localStorage.getItem("userId");
       var mesaj = true;
       var obj;
-      var link = "https://findastudybuddy.azurewebsites.net/api/Profile/GetById?userId="+1;
+      var link = "https://findastudybuddymds.azurewebsites.net/api/Profile/GetById?userId="+1;
 
       axios.get(link)
       .then(response =>

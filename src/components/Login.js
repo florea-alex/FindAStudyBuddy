@@ -20,7 +20,7 @@ function Login() {
       password: pass.value, 
     };
    
-    axios.post('https://findastudybuddy.azurewebsites.net/api/Auth/Login', object)
+    axios.post('https://findastudybuddymds.azurewebsites.net/api/Auth/Login', object)
        .then(response => {
          console.log(response)
             if (response.status != 200) {
@@ -38,6 +38,7 @@ function Login() {
              console.log(error.response.data.message);
              alert("There was a problem with the registration. Please try again.\n" + "Error: " + error.response.data.message);
             })
+        setTimeout(() => {window.location.pathname = "/profile";}, 1000);
   };
 
   // Generate JSX code for error message

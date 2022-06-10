@@ -3,9 +3,12 @@ import Main from './SwipeCarousel/Main';
 import {RemoveScrollBar} from 'react-remove-scroll-bar';
 
 function Dashboard() {
-
+  const imageClick = () => {
+    window.location.pathname='/chat';
+  }
   var flag = localStorage.getItem("isAuthenticated");
   return (
+    <div>
     <div className='swipe'>
       <RemoveScrollBar />
       <Main />
@@ -34,6 +37,8 @@ function Dashboard() {
     </div>
     } */}
   
+  </div>
+  <img  style={{cursor: "pointer"}} className="chat" src={require('../assets/chat.png')} onClick={() => imageClick()}/>
   </div>
   )
 }

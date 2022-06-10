@@ -18,7 +18,7 @@ function ResetPassword() {
    const object = {
        email: uname.value
    }
-    axios.post('https://findastudybuddy.azurewebsites.net/api/Auth/reset-pass-token', object)
+    axios.post('https://findastudybuddymds.azurewebsites.net/api/Auth/reset-pass-token', object)
        .then(response => {
             token_res = response.data.message;
             const obj = {
@@ -27,7 +27,7 @@ function ResetPassword() {
                 confirmNewPassord: confirmNewPass.value,
                 token: token_res
              };
-             axios.post('https://findastudybuddy.azurewebsites.net/api/Auth/Reset-Password', obj)
+             axios.post('https://findastudybuddymds.azurewebsites.net/api/Auth/Reset-Password', obj)
                 .then(response => {
                     console.log(response);
                 })

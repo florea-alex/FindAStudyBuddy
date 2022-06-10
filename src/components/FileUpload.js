@@ -4,7 +4,7 @@ import axios from "axios";
 class FileUpload extends Component {
 
     // API Endpoints
-    custom_file_upload_url = `https://findastudybuddy.azurewebsites.net/api/Photos/Add-Image?userId=`+localStorage.getItem("userId");
+    custom_file_upload_url = `https://findastudybuddymds.azurewebsites.net/api/Photos/Add-Image?userId=`+localStorage.getItem("userId");
 
 
     constructor(props) {
@@ -65,7 +65,7 @@ class FileUpload extends Component {
             // in my case here the field name is customFile
 
             axios.put(
-                "https://findastudybuddy.azurewebsites.net/api/Photos/Update-Image?userId="+localStorage.getItem("userId"),
+                "https://findastudybuddymds.azurewebsites.net/api/Photos/Update-Image?userId="+localStorage.getItem("userId"),
                 formData,
                 {
                     headers: {
@@ -85,7 +85,7 @@ class FileUpload extends Component {
 
     handleDelete = () => {
         axios.delete(
-            "https://findastudybuddy.azurewebsites.net/api/Photos/Delete-Image?userId="+localStorage.getItem("userId"),
+            "https://findastudybuddymds.azurewebsites.net/api/Photos/Delete-Image?userId="+localStorage.getItem("userId"),
             )
             .then(res => {
                 console.log(`Success` + res.data);
@@ -101,12 +101,13 @@ class FileUpload extends Component {
     // render from here
     render() { 
         var link = localStorage.getItem("link");
+        console.log("link is: "+link);
         return (
             <div className='profiledesc3'>
 
                 {/* image input field */}
                 
-                {link != "" ?
+                {(link != null && link != "") ?
                 //<input type="submit" onClick={this.handleSubmitFileUpdate} value="Update photo"/>
                 <input type="submit" onClick={this.handleDelete} value="Delete photo"/>
                 :

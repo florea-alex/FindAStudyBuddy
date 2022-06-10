@@ -2,6 +2,66 @@
 padding: 0;
 }
 
+.modal {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+.modal > .header1 {
+  width: 90%;
+  padding-right: 100px;
+  border-bottom: 3px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  padding-top: 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.chat {
+  width: 60px;
+  opacity: 70%;
+  display: block;
+  margin-right: auto;
+  padding-top: 10px;
+  /* margin-left: -470px; */
+  margin-left: -93%;
+}
+
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
 .text-link {
   color: #a79e84;
   text-decoration: none;
@@ -281,9 +341,35 @@ input{
   filter: brightness(75%);
 }
 
-.button-logout4:hover {
+.button-logout4 {
   background: #AD0A02;
   border: 1px solid #AD0A02;
+}
+
+.button-logout4:hover {
+  background: #660000;
+  border: 1px solid #660000;
+}
+
+.button-logout5 {
+  margin-top: 10px;
+  cursor: pointer;
+  width: 160px;
+  font-size: 15px;
+  background: #28A828;
+  border: 1px solid #28A828;
+  margin-right: 30px;
+  margin-left: 30px;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-logout5:hover {
+  background: #006200;
+  border: 1px solid #006200;
 }
 
 .app {

@@ -18,6 +18,11 @@ export default function Main() {
     }
   }, [pets.length]);
 
+  const removeTopCard = useCallback(() => {
+    setPets((prevState) => prevState.slice(1));
+    swipe.setValue({ x: 0, y: 0 });
+  }, [swipe]);
+
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (_, { dx, dy, y0 }) => {
@@ -27,8 +32,12 @@ export default function Main() {
     onPanResponderRelease: (_, { dx, dy }) => {
       const direction = Math.sign(dx);
       const isActionActive = Math.abs(dx) > ACTION_OFFSET;
-
       if (isActionActive) {
+        console.log(pets[0].name + " action:");
+        if (direction == -1)
+          console.log("swipe left");
+        else if (direction == 1)
+          console.log("swipe right");
         Animated.timing(swipe, {
           duration: 200,
           toValue: {
@@ -50,18 +59,18 @@ export default function Main() {
     },
   });
 
-  const removeTopCard = useCallback(() => {
-    setPets((prevState) => prevState.slice(1));
-    swipe.setValue({ x: 0, y: 0 });
-  }, [swipe]);
-
   const handleChoice = useCallback(
     (direction) => {
+      if (direction == -1)
+          console.log("swipe left");
+        else if (direction == 1)
+          console.log("swipe right");
       Animated.timing(swipe.x, {
         toValue: direction * CARD.OUT_OF_SCREEN,
         duration: 400,
         useNativeDriver: true,
       }).start(removeTopCard);
+      console.log(pets);
     },
     [removeTopCard, swipe.x]
   );
@@ -87,7 +96,6 @@ export default function Main() {
         })
         .reverse()}
 
-      <Footer handleChoice={handleChoice} />
     </View>
   );
 }
