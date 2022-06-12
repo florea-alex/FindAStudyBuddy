@@ -16,5 +16,6 @@ namespace ProiectMDS.DAL.Entities.Auth
         public int? ProfileId { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
         public virtual UserProfile Profile { get; set; }
+        public virtual ICollection<UserConnections> UserConnections { get; set; }
     }
 }

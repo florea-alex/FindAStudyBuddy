@@ -28,6 +28,9 @@ namespace ProiectMDS.DAL.Configurations
                 .WithOne(x => x.User)
                 .HasForeignKey<User>(x => x.ProfileId)
                 .IsRequired(false);
+
+            builder.HasMany(x => x.UserConnections)
+                .WithOne(x => x.User);
         }
     }
 }

@@ -74,7 +74,7 @@ namespace ProiectMDS.Services.Managers
                 if (!refreshTokenResult) { return new ResponseLogin { Success = false }; }
 
                 //await _emailServices.SendEmailLogin(user.Email, "New login!", "<h1>Hey! \nNew login to your account noticed</h1><p>New login to your account at " + DateTime.Now + "</p>");
-                //await _emailServices.SendEmailRegister(user.Email, loginModel.UserName); //e pentru test mai rapid
+                //await _emailServices.SendEmailRegister(user.Email, loginModel.UserName); //e pentru test mai rapid          
 
                 return new ResponseLogin
                 {
@@ -82,7 +82,8 @@ namespace ProiectMDS.Services.Managers
                     AccesToken = token,
                     RefreshToken = refreshToken,
                     Role = role.FirstOrDefault(),
-                    Id = user.Id
+                    Id = user.Id,
+                    Users = await GetSuggestions(user)
                 };
             }
             else
@@ -226,6 +227,37 @@ namespace ProiectMDS.Services.Managers
             await _appDbContext.SaveChangesAsync();
 
             return true;
+        }
+
+        private async Task<List<int>> GetSuggestions(User user)
+        {
+            //selectez toti prietenii mei
+            var friends = await _appDbContext.UserConnections.Where(x => x.UserId == user.Id).ToListAsync();
+
+            //selectez toti userii inafara de mine si de prietenii mei
+            IQueryable<User> users = _appDbContext.Users.Where(x => x.Id != user.Id && !x.UserConnections.Any(y => y.UserId == user.Id)); 
+
+            //selectez cursurile mele
+            var courses = await _appDbContext.Courses.Where(x => x.ProfileId == user.ProfileId).ToListAsync();
+            var coursesName = courses.Select(x => x.courseName).ToList();
+
+            //acum fac selectia pe baza cursurilor
+            var _users = await users.Include(x => x.Profile).Where(x => x.Profile.Courses.Any(y => coursesName.Contains(y.courseName))).ToListAsync();
+
+            var response = new List<int>();
+
+            foreach (var _user in _users)
+            {
+                var userCourses = await _appDbContext.Courses.Where(x => x.ProfileId == _user.ProfileId).ToListAsync();
+                foreach (var userCourse in userCourses)
+                {
+                    var helper = courses.FirstOrDefault(x => x.courseName == userCourse.courseName && x.Helper != userCourse.Helper);
+                    if (helper != null)
+                        response.Add(_user.Id);
+                }
+            }
+
+            return response.Distinct().ToList();
         }
     }
 }
