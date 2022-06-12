@@ -256,7 +256,7 @@ namespace ProiectMDS.Services.Managers
                         response.Add(_user.Id);
                 }
             }
-            //daca vezi asta esti sexy
+            
             return response.Distinct().ToList();
         }
     }
