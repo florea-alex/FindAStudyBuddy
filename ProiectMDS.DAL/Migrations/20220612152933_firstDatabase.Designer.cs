@@ -12,8 +12,8 @@ using ProiectMDS.DAL;
 namespace ProiectMDS.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220514162939_Size")]
-    partial class Size
+    [Migration("20220612152933_firstDatabase")]
+    partial class firstDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -327,6 +327,24 @@ namespace ProiectMDS.DAL.Migrations
                     b.ToTable("Locations");
                 });
 
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.UserConnections", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserConnections");
+                });
+
             modelBuilder.Entity("ProiectMDS.DAL.Entities.UserProfile", b =>
                 {
                     b.Property<int>("Id")
@@ -442,6 +460,17 @@ namespace ProiectMDS.DAL.Migrations
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("ProiectMDS.DAL.Entities.UserConnections", b =>
+                {
+                    b.HasOne("ProiectMDS.DAL.Entities.Auth.User", "User")
+                        .WithMany("UserConnections")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ProiectMDS.DAL.Entities.UserProfile", b =>
                 {
                     b.HasOne("ProiectMDS.DAL.Entities.Location", "Address")
@@ -458,6 +487,8 @@ namespace ProiectMDS.DAL.Migrations
 
             modelBuilder.Entity("ProiectMDS.DAL.Entities.Auth.User", b =>
                 {
+                    b.Navigation("UserConnections");
+
                     b.Navigation("UserRoles");
                 });
 

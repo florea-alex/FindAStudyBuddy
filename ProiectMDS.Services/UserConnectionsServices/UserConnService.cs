@@ -51,10 +51,13 @@ namespace ProiectMDS.Services.UserConnectionsServices
             if (user == null)
                 throw new Exception("You don't exist lmao");
 
-            var friends = await _context.UserConnections.Where(x => x.UserId == userId).ToListAsync();
+            var friends = await _context.UserConnections.Where(x => x.UserId == userId).Select(x => x.UserId).ToListAsync();
+
+            var test = await _context.Users.Select(x => x.UserConnections.Select(x => x.Id).ToList()).ToListAsync();
 
             var friendsModel = new GetUserConnectionsModel();
-            friendsModel.Users = friends;
+            friendsModel.Users = test;
+
 
             return friendsModel;
         }

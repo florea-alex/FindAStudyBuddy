@@ -9,6 +9,6 @@ namespace ProiectMDS.DAL.Models.UserConnectionsModels
 {
     public class GetUserConnectionsModel
     {
-        public List<UserConnections> Users { get; set; }
+        public List<List<int>> Users { get; set; }
     }
 }

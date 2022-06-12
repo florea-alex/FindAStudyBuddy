@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProiectMDS.DAL.Migrations
 {
-    public partial class AOLOOOOOOOOOOOOOO : Migration
+    public partial class firstDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,6 +22,20 @@ namespace ProiectMDS.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BaseCourses",
+                columns: table => new
+                {
+                    CourseId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    courseName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    credits = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BaseCourses", x => x.CourseId);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,7 +85,8 @@ namespace ProiectMDS.DAL.Migrations
                     yearOfStudy = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     phoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
-                    LocationId = table.Column<int>(type: "int", nullable: true)
+                    LocationId = table.Column<int>(type: "int", nullable: true),
+                    Photo = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -125,8 +140,9 @@ namespace ProiectMDS.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    courseName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    courseName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Credit = table.Column<int>(type: "int", nullable: false),
+                    Helper = table.Column<bool>(type: "bit", nullable: false),
                     ProfileId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -225,6 +241,25 @@ namespace ProiectMDS.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserConnections",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserConnections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserConnections_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -282,6 +317,11 @@ namespace ProiectMDS.DAL.Migrations
                 column: "LocationId",
                 unique: true,
                 filter: "[LocationId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserConnections_UserId",
+                table: "UserConnections",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -302,7 +342,13 @@ namespace ProiectMDS.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BaseCourses");
+
+            migrationBuilder.DropTable(
                 name: "Courses");
+
+            migrationBuilder.DropTable(
+                name: "UserConnections");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
