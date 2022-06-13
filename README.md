@@ -2,14 +2,13 @@
 
 #### User Stories:
 1. As a user, I want to be able to create an account.
+
 **Acceptance criteria:**
-
-- should implement a functional "create account" button which leads the user on a new page
-
-- should have text box for name/surname, email, password, university (optional at this stage), user's current year of study (optional at this stage), address (optional throughout the experience), phone number (optional throughout the experience), a short description (maximum 500 characters, mandatory at this stage), the courses the user needs help (optional at this stage)
-- should check if the user's email is valid (has @generic.com, does not contain characters like: ",;\:/<$>%&*#~".
-- should check if the password is valid: at least 10 characters, at least one uppercase letter, at least one character
-- should have the possibility to remember your account by clicking "remember my password" button from the landing page
+  - should implement a functional "create account" button which leads the user on a new page
+  - should have text box for name/surname, email, password, university (optional at this stage), user's current year of study (optional at this stage), address (optional throughout the experience), phone number (optional throughout the experience), a short description (maximum 500 characters, mandatory at this stage), the courses the user needs help (optional at this stage)
+  - should check if the user's email is valid (has @generic.com, does not contain characters like: ",;\:/<$>%&*#~".
+  - should check if the password is valid: at least 10 characters, at least one uppercase letter, at least one character
+  - should have the possibility to remember your account by clicking "remember my password" button from the landing page
 
 2. As a newly registered user, I want to complete my profile.
 3. As an user with an existing account, I want to sign into the app so that I can connect with the other users.
