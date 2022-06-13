@@ -45,7 +45,6 @@ Find the project video presentation [here]().
         - an user can choose if they want to chat or not with the current suggested person in the tab "find new buddies"
         - should exist a "messages" button where you can find an user's conversations with all their connections
         - after going to an user's conversation there should be a list with your existing connections and chats, the chat you clicked most recently
-        - after selecting a specific chat, there is a text box to write a message, buttons for attachments (.png, .pdf, .doc, .docx, .txt) and the user has the possibility to go on the other user's profile
         - by swiping right/left an user will have the right-swiped students in the chat page which can be accessed by clicking on the bottom left icon in the dashboard page
 
 5. As an user, I want to update my profile anytime.
