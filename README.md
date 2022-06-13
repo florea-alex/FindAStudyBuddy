@@ -6,7 +6,7 @@ Find all the steps we've followed for the software development process in this [
 
 #### Project video presentation
 Find the project video presentation [here]().
-Note: you might need to use a Google account in order to access the drive where the video has been uploaded.
+**Note:** you might need to use a Google account in order to access the drive where the video has been uploaded.
 
 # Members 
 - [Cordun Diana](https://github.com/dianacordun)
