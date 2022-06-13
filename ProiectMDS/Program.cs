@@ -10,6 +10,7 @@ using ProiectMDS.DAL.Seeders;
 using ProiectMDS.Services;
 using ProiectMDS.Services.AuthService;
 using ProiectMDS.Services.Helpers;
+using ProiectMDS.Services.Hubs;
 using ProiectMDS.Services.Managers;
 using ProiectMDS.Services.UriServices;
 using ProiectMDS.Services.UriServicess;
@@ -26,6 +27,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         B => B.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
 });
 
+
+builder.Services.AddSignalR();
 
 builder.Services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<AppDbContext>()
@@ -148,6 +151,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<ChatHub>("/chatsocket");
 
 app.UseCors(x => x
         .AllowAnyOrigin()
