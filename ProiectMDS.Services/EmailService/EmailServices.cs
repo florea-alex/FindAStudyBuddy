@@ -22,7 +22,7 @@ namespace ProiectMDS.Services.EmailService
             //var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
             var apiKey = _configuration.GetSection("SENDGRID_API_KEY").Get<String>();
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("eneandrei0228@gmail.com", "Find a study buddy");
+            var from = new EmailAddress("eneandrei2000@gmail.com", "Find a study buddy");
             var to = new EmailAddress(toEmail);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, content, content);
             var response = await client.SendEmailAsync(msg);
@@ -34,7 +34,7 @@ namespace ProiectMDS.Services.EmailService
             var apiKey = _configuration.GetSection("SENDGRID_API_KEY").Get<String>();
             var sendGridClient = new SendGridClient(apiKey);
             var sendGridMessage = new SendGridMessage();
-            sendGridMessage.SetFrom("eneandrei0228@gmail.com", "Find a study buddy");
+            sendGridMessage.SetFrom("eneandrei2000@gmail.com", "Find a study buddy");
             sendGridMessage.AddTo(toEmail);
             //var templateKey = Environment.GetEnvironmentVariable("SENDGRID_TEMPLATE_ID");
             var templateKey = _configuration.GetSection("SENDGRID_TEMPLATE_ID").Get<String>();
@@ -57,7 +57,7 @@ namespace ProiectMDS.Services.EmailService
         {
             var apiKey = _configuration.GetSection("SENDGRID_API_KEY").Get<String>();
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("eneandrei0228@gmail.com", "Find a study buddy");
+            var from = new EmailAddress("eneandrei2000@gmail.com", "Find a study buddy");
             var to = new EmailAddress(toEmail);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, content, content);
             var response = await client.SendEmailAsync(msg);

@@ -73,7 +73,7 @@ namespace ProiectMDS.Services.Managers
 
                 if (!refreshTokenResult) { return new ResponseLogin { Success = false }; }
 
-                //await _emailServices.SendEmailLogin(user.Email, "New login!", "<h1>Hey! \nNew login to your account noticed</h1><p>New login to your account at " + DateTime.Now + "</p>");
+                await _emailServices.SendEmailLogin(user.Email, "New login!", "<h1>Hey! \nNew login to your account noticed</h1><p>New login to your account at " + DateTime.Now + "</p>");
                 //await _emailServices.SendEmailRegister(user.Email, loginModel.UserName); //e pentru test mai rapid          
 
                 return new ResponseLogin
@@ -114,7 +114,7 @@ namespace ProiectMDS.Services.Managers
 
             if (result.Succeeded)
             {
-                //await _emailServices.SendEmailRegister(user.Email, user.UserName); // dupa ce te inregistrezi primesti un email de welcome (am luat un template gratis de pe net sa para mai dragut)
+                await _emailServices.SendEmailRegister(user.Email, user.UserName); // dupa ce te inregistrezi primesti un email de welcome (am luat un template gratis de pe net sa para mai dragut)
 
                 await _userManager.AddToRoleAsync(user, registerModel.Role);
             }

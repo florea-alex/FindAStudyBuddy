@@ -24,9 +24,9 @@ namespace ProiectMDS.Controllers
         }
 
         [HttpDelete("RemoveFriend")]
-        public async Task<IActionResult> Remove([FromQuery] int friendId)
+        public async Task<IActionResult> Remove([FromQuery] int userId, int friendId)
         {
-            var result = await _userConn.RemoveFriend(friendId);
+            var result = await _userConn.RemoveFriend(userId, friendId);
 
             return Ok(result);
         }

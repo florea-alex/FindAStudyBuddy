@@ -11,7 +11,7 @@ namespace ProiectMDS.Services.UserConnectionsServices
     public interface IUserConnService
     {
         Task<string> AddFriend(AddFriendModel model);
-        Task<string> RemoveFriend(int id);
+        Task<string> RemoveFriend(int id1, int id2);
         Task<GetUserConnectionsModel> GetAllFriends(int id);
     }
 }
