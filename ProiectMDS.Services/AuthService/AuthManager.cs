@@ -232,10 +232,10 @@ namespace ProiectMDS.Services.Managers
         private async Task<List<int>> GetSuggestions(User user)
         {
             //selectez toti prietenii mei
-            var friends = await _appDbContext.UserConnections.Where(x => x.UserId == user.Id).ToListAsync();
+            var friends = await _appDbContext.UserConnections.Where(x => x.UserId == user.Id).Select(x => x.FriendId).ToListAsync();
 
             //selectez toti userii inafara de mine si de prietenii mei
-            IQueryable<User> users = _appDbContext.Users.Where(x => x.Id != user.Id && !x.UserConnections.Any(y => y.UserId == user.Id)); 
+            IQueryable<User> users = _appDbContext.Users.Where(x => x.Id != user.Id && !friends.Contains(x.Id));
 
             //selectez cursurile mele
             var courses = await _appDbContext.Courses.Where(x => x.ProfileId == user.ProfileId).ToListAsync();

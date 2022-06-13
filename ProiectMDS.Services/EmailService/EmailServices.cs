@@ -27,6 +27,8 @@ namespace ProiectMDS.Services.EmailService
             var msg = MailHelper.CreateSingleEmail(from, to, subject, content, content);
             var response = await client.SendEmailAsync(msg);
         }
+        
+        
 
         public async Task SendEmailRegister(string toEmail, string name)
         {
@@ -52,6 +54,7 @@ namespace ProiectMDS.Services.EmailService
                 Console.WriteLine("Email sent");
             }
         }
+
 
         public async Task SendPassword(string toEmail, string subject, string content)
         {

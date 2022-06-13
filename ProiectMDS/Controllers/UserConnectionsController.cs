@@ -38,5 +38,13 @@ namespace ProiectMDS.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("GetSuggestions")]
+        public async Task<IActionResult> GetSuggestions([FromQuery] int userId)
+        {
+            var result = await _userConn.GetSuggestions(userId);
+
+            return Ok(result);
+        }
     }
 }

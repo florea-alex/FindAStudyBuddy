@@ -11,5 +11,6 @@ namespace ProiectMDS.Services.EmailService
         Task SendEmailLogin(string model, string subject, string content);
         Task SendEmailRegister(string model, string name);
         Task SendPassword(string model, string subject, string content);
+        //Task SendEmailToAFriend(string toEmail, string subject, string content);
     }
 }
