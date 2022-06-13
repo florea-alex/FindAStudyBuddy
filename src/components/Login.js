@@ -29,6 +29,7 @@ function Login() {
               console.log(response);
               localStorage.setItem("userId", response.data.id);
               localStorage.setItem("isAuthenticated", "true");
+              localStorage.setItem("users", response.data.users);
               console.log(localStorage)
               setIsSubmitted(true);
               //console.log(response)

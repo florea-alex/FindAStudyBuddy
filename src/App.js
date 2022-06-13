@@ -9,12 +9,12 @@ import Dashboard from "./components/Dashboard";
 import { Route, Routes} from 'react-router-dom';
 import ResetPassword from './components/ResetPassword'
 import './App.css';
-import Profile from "./components/Profile";
 import Courses from "./components/Courses"
 import Profile2 from "./components/Profile2";
 import Addcourseneed from "./components/AddCourseNeed";
 import Addcourseoffer from "./components/AddCourseOffer";
 import Chat from "./components/Chat";
+import Test from "./components/Test";
 
 function App() {
   console.log(window.location.pathname);
@@ -24,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path='/login' element={<Login />} />
+        <Route path='/test' element={<Test />} />
         <Route path='/register' element={<Register />} />
         <Route path='/resetpassword' element={<ResetPassword/>} />
         <Route path='/dashboard' element={<Dashboard />} />

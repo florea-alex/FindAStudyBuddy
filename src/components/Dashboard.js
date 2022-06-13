@@ -6,6 +6,7 @@ function Dashboard() {
   const imageClick = () => {
     window.location.pathname='/chat';
   }
+  console.log(localStorage);
   var flag = localStorage.getItem("isAuthenticated");
   return (
     <div>

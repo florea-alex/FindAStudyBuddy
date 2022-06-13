@@ -1,25 +1,35 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Animated, PanResponder, View } from 'react-native';
-
+import axios from 'axios';
 import Card from '../Card';
 import Footer from '../Footer';
 import { ACTION_OFFSET, CARD } from '../utils/constants';
-import { pets as petsArray } from './data';
+import { usersName as usersArray, pets as petsArray } from './data';
 import { styles } from './styles';
 
 export default function Main() {
-  const [pets, setPets] = useState(petsArray);
+
+  //const [pets, setPets] = useState(petsArray);
+  const [users, setUsers] = useState([]);
+  const [nr, setNr] = useState(0);
+  //setTimeout(() => {usersArray.then((value) => {setUsers(value);})}, 1000);
+  console.log(users);
   const swipe = useRef(new Animated.ValueXY()).current;
   const tiltSign = useRef(new Animated.Value(1)).current;
-
   useEffect(() => {
-    if (!pets.length) {
-      setPets(petsArray);
+    if (!users.length) {
+      if (nr==0) {
+      setTimeout(() => {usersArray.then((value) => {setUsers(value);})}, 1000);
+      setNr(1);
+      }
+      else if (nr == 1) {
+        document.getElementById('run').style.display = 'block';
+      }
     }
-  }, [pets.length]);
+  }, [users.length]);
 
   const removeTopCard = useCallback(() => {
-    setPets((prevState) => prevState.slice(1));
+    setUsers((prevState) => prevState.slice(1));
     swipe.setValue({ x: 0, y: 0 });
   }, [swipe]);
 
@@ -33,11 +43,22 @@ export default function Main() {
       const direction = Math.sign(dx);
       const isActionActive = Math.abs(dx) > ACTION_OFFSET;
       if (isActionActive) {
-        console.log(pets[0].name + " action:");
+        console.log(users[0].name + " action:");
         if (direction == -1)
           console.log("swipe left");
-        else if (direction == 1)
+        else if (direction == 1) {
           console.log("swipe right");
+          var friendId = users[0].id;
+          var userId = localStorage.getItem("userId");
+          console.log(userId, friendId);
+          axios.post("https://findastudybuddymds.azurewebsites.net/api/UserConnections/AddFriend?UserId="+userId+"&FriendId="+friendId)
+            .then(response => {
+              console.log(response);
+            })
+            .catch(error => {
+              console.log(error);
+            })
+        }
         Animated.timing(swipe, {
           duration: 200,
           toValue: {
@@ -70,14 +91,13 @@ export default function Main() {
         duration: 400,
         useNativeDriver: true,
       }).start(removeTopCard);
-      console.log(pets);
     },
     [removeTopCard, swipe.x]
   );
 
   return (
     <View style={styles.container}>
-      {pets
+      {users
         .map(({ name, source }, index) => {
           const isFirst = index === 0;
           const dragHandlers = isFirst ? panResponder.panHandlers : {};
@@ -95,6 +115,7 @@ export default function Main() {
           );
         })
         .reverse()}
+
 
     </View>
   );
