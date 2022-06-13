@@ -16,14 +16,21 @@ async function myfunc () {
     if (photolink == "") {
       photolink = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
     }
+    var data3 = await axios.get("https://findastudybuddymds.azurewebsites.net/api/Profile/GetById?userId="+id);
+    var cursuri = data3.data.data.courses;
+    var yearOfStudy = data3.data.data.yearOfStudy;
+    console.log(yearOfStudy);
+    console.log(cursuri);
     const object = {
       id: id,
       name: prenume + " " + nume,
-      source: photolink
+      source: photolink,
+      yearOfStudy: yearOfStudy,
+      courses: cursuri
     };
     users.push(object);
 
-    
+
 }
 console.log(users);
 return users;

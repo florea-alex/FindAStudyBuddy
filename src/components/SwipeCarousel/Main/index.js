@@ -98,24 +98,30 @@ export default function Main() {
   return (
     <View style={styles.container}>
       {users
-        .map(({ name, source }, index) => {
+        .map(({ id, name, source, yearOfStudy, courses }, index) => {
           const isFirst = index === 0;
           const dragHandlers = isFirst ? panResponder.panHandlers : {};
 
           return (
             <Card
               key={name}
-              name={name}
+              name={name+"\nYear: "+yearOfStudy}
               source={source}
+              courses={courses}
               isFirst={isFirst}
               swipe={swipe}
               tiltSign={tiltSign}
               {...dragHandlers}
             />
+            
           );
+          
         })
         .reverse()}
-
+        <h2 id='run' className='run-matches' style={{display: "none"}}>
+          We've run out of 
+          <br></br>potential matches for you.
+        </h2>
 
     </View>
   );
