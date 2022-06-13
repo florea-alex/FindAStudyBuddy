@@ -9,6 +9,6 @@ namespace ProiectMDS.DAL.Models.HubModels
     public class MessageModel
     {
         public string user { get; set; }
-        public string msgText { get; set; }
+        public string message { get; set; }
     }
 }

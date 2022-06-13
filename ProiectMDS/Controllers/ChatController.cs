@@ -20,7 +20,7 @@ namespace ProiectMDS.Controllers
         [HttpPost]
         public IActionResult SendRequest([FromBody] MessageModel msg)
         {
-            _hubContext.Clients.All.SendAsync("ReceiveOne", msg.user, msg.msgText);
+            _hubContext.Clients.All.SendAsync("ReceiveOne", msg.user, msg.message);
             return Ok();
         }
     }
