@@ -2,7 +2,6 @@
 
 #### User Stories:
 1. As a user, I want to be able to create an account.
-
     - **Acceptance criteria:**
       - should implement a functional "create account" button which leads the user on a new page
       - should have text box for name/surname, email, password, university (optional at this stage), user's current year of study (optional at this stage), address (optional throughout the experience), phone number (optional throughout the experience), a short description (maximum 500 characters, mandatory at this stage), the courses the user needs help (optional at this stage)
