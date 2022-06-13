@@ -1,5 +1,4 @@
 # Find A Study Buddy
----
 We designed and developed a Web Application for students which allows users to create and customize their account. The courses linked to a student’s profile are split into two categories: courses for which he/she can offer help and courses for which he/she needs help from others. An user can choose the users they want to connect with, by swiping right when their profile appears on the Dashboard page. If two students match, they now have a connection and can talk via chat and they can end their connection if they choose to.
 
 # Members 
@@ -9,7 +8,7 @@ We designed and developed a Web Application for students which allows users to c
 @florea-alex
 @vladfxstoader
 
-#### User Stories
+# User Stories
 ---
 1. As a user, I want to be able to create an account.
 
