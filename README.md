@@ -79,7 +79,7 @@ Find the project video presentation [here]().
         - the deleted profile won't be available for the other users
         - an error 404 will be displayed when another user tries to see the deleted profile
 
-9. As an user with chats, I want to be able to access my dashboard whenever I would like to.
+9. As an user with matches, I want to be able to access my dashboard whenever I would like to.
 
       - **Acceptance criteria**
         - an user would be able to access their dashboard whenever they are logged and go on the dashboard page
