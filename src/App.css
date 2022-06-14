@@ -31,6 +31,7 @@ padding: 0;
   text-align: center;
   align-content: center;
 }
+
 .modal > .actions {
   width: 100%;
   padding: 10px 5px;
@@ -96,6 +97,19 @@ padding: 0;
 
 .desctext {
   color: #bd5734;
+}
+
+.homedescription10 {
+  margin-top:150px;
+  width: 200px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 30px;
+  background-color: #f5f5df;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .homedescription {
@@ -237,7 +251,8 @@ body{
 }
 
 .swipe {
-  height: 570px;
+  margin-top: 50px;
+  height: 500px;
   width: 500px;
   border-radius: 20px;
   background-color: #f5f5df;

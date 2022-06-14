@@ -17,7 +17,6 @@ import Chat from "./components/Chat";
 import Test from "./components/Test";
 
 function App() {
-  console.log(window.location.pathname);
   return (
     <div className="app">
       <Header />

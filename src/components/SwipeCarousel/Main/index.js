@@ -105,7 +105,7 @@ export default function Main() {
           return (
             <Card
               key={name}
-              name={name+"\nYear: "+yearOfStudy}
+              name={"Year: "+yearOfStudy+"\n"+name}
               source={source}
               courses={courses}
               isFirst={isFirst}

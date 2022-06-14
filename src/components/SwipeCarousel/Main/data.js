@@ -1,9 +1,15 @@
 import axios from 'axios';
-const usersId = localStorage.getItem("users").split(",");
+
 
 async function myfunc () {
+  // if (localStorage.getItem("isAuthenticated") == "false")
+  //   var usersId = [];
+  // else
+  //   var usersId = localStorage.getItem("users").split(",");
+  var data = await axios.get("https://findastudybuddymds.azurewebsites.net/api/UserConnections/GetSuggestions?userId="+localStorage.getItem("userId"));
+  var usersId = data.data;
   const users = [];
-  console.log(usersId);
+  //console.log(usersId);
   for(let i = 0; i<usersId.length; i++) {
     var id = usersId[i];
     var data1 = await axios.get("https://findastudybuddymds.azurewebsites.net/api/User/GetById?id="+id);
@@ -19,8 +25,8 @@ async function myfunc () {
     var data3 = await axios.get("https://findastudybuddymds.azurewebsites.net/api/Profile/GetById?userId="+id);
     var cursuri = data3.data.data.courses;
     var yearOfStudy = data3.data.data.yearOfStudy;
-    console.log(yearOfStudy);
-    console.log(cursuri);
+    //console.log(yearOfStudy);
+    //console.log(cursuri);
     const object = {
       id: id,
       name: prenume + " " + nume,
@@ -32,7 +38,7 @@ async function myfunc () {
 
 
 }
-console.log(users);
+//console.log(users);
 return users;
 }
 
