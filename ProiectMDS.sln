@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProiectMDS.DAL", "ProiectMD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProiectMDS.Services", "ProiectMDS.Services\ProiectMDS.Services.csproj", "{CC00D824-6C64-4B17-B42E-CC2966EADE7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{DC0CBCC1-6EC1-4AEE-9313-E37C4F6DE29E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj", "{DC0CBCC1-6EC1-4AEE-9313-E37C4F6DE29E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProiectMDS_Test", "ProiectMDS_Test\ProiectMDS_Test.csproj", "{1149751F-ABFD-4433-A63F-E0592B9E5FF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DC0CBCC1-6EC1-4AEE-9313-E37C4F6DE29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC0CBCC1-6EC1-4AEE-9313-E37C4F6DE29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC0CBCC1-6EC1-4AEE-9313-E37C4F6DE29E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1149751F-ABFD-4433-A63F-E0592B9E5FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1149751F-ABFD-4433-A63F-E0592B9E5FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1149751F-ABFD-4433-A63F-E0592B9E5FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1149751F-ABFD-4433-A63F-E0592B9E5FF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
