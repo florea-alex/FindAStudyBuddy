@@ -110,3 +110,6 @@ Find the project video presentation [here](https://youtu.be/yR2CKo3zjvg).
       - **Acceptance criteria**
         - should create an email address which sends automatically a generic confirmation email for registration (findastudybuddy2022@gmail.com)
         - should use a Sendgrid API
+
+# UML Use Case Diagram
+![UML Diagram](https://user-images.githubusercontent.com/77334927/173594325-b721925c-076a-4ae3-aed3-a3f0c880bc2f.jpg)
