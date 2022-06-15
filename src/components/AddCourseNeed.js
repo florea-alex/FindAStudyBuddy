@@ -54,7 +54,7 @@ class Addcourseneed extends Component {
           {
             flag == "true" ?
             
-        <div className='homedescription2'>
+        <div className='homedescription9'>
           <h1 className='desctext'>Add course for receiving help</h1>
           {obj != undefined ?
           <div className='profiledesc'>

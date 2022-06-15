@@ -48,6 +48,7 @@ class Chat extends Component {
       var photolink = "";
       var data2 = await axios.get(link3)
       photolink = data2.data.data;
+      console.log(photolink);
       if (photolink == "") {
         photolink = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
       }
@@ -111,7 +112,22 @@ class Chat extends Component {
                   >
                     View e-mail
                   </button>
-                
+                  <button
+                    className="button-logout4"
+                    onClick={() => {
+                      console.log(localStorage.getItem("userId"), d);
+                      axios.delete("https://findastudybuddymds.azurewebsites.net/api/UserConnections/RemoveFriend?userId="+localStorage.getItem("userId")+"&friendId="+d)
+                        .then(response => {
+                          console.log(response);
+                        })
+                        .catch(error =>
+                          console.log(error));
+                        setTimeout(() => {window.location.pathname = "/chat";}, 1000);
+                    }}
+                  >
+                    Delete friend
+                  </button>
+                <br></br>
               </div>
             )}
           </Popup>)

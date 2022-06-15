@@ -24,7 +24,7 @@ function HomeDescription() {
         :
         <div>
           <div>
-          Please log in or register with an existing account 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please log in or register with an existing account 
           </div>
           <div>
           in order to access the app and connect with your peers!
