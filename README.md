@@ -4,7 +4,7 @@ We designed and developed a Web Application for students which allows users to c
 
 Find all the steps we've followed for the software development process in this [wiki](https://github.com/florea-alex/FindAStudyBuddy/wiki).
 
-#### Project video presentation
+## Project video presentation
 Find the project video presentation [here](https://youtu.be/yR2CKo3zjvg).
 
 # Members 
